@@ -202,43 +202,41 @@ class MainWindow:
         Filepath_psd = filedialog.askopenfilename()      
         self.ui.psd_lineEdit.setText(Filepath_psd)
     
-#图层命名方式
-    def extractLayerImage(self,layer,blist):
-
+    #png到处方法
+    def extractLayerImage(self,layer,list_b):
        
         Filepath_psd = self.ui.psd_lineEdit.text()
-    
         psd_Path = os.path.dirname(Filepath_psd)    
         png_name = "%s.png"%(layer.name)
         png_path = os.path.join (psd_Path,png_name)
         layer_image=layer.composite()        
         layer_image.save(png_path)
 
-        blist.append(png_path)
+        list_b.append(png_path)
        
-        return blist
+        return list_b
+
+
     wlist = []
-#分析psd贴图导出PNG
-    def extrac_psd(self):
+    #分析psd贴图导出PNG
+    def extrac_psd(self): 
         mark_r = self.ui.mark_r.text()
         mark_g = self.ui.mark_g.text()
         mark_b = self.ui.mark_b.text()
         mark_a = self.ui.mark_a.text()
-
-
-       
-
         messagebox.showinfo( "提示", "点击确定开始分解，耐心等待几秒，请勿点击屏幕")
 
         Filepath_psd = self.ui.psd_lineEdit.text()
-        alist = []
-
+        list_b = []
         psd = PSDImage.open(Filepath_psd)
         for layer in psd.descendants():
             print(layer)
             global wlist
-            wlist = self.extractLayerImage(layer,alist)
+            wlist = self.extractLayerImage(layer,list_b)
 
+        print(wlist)    
+
+        #导入路径匹配
         messagebox.showinfo( "提示", "PSD分解完成点击确认导入路径")
         for f_path in wlist:
             if mark_r in f_path:
