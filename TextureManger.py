@@ -61,8 +61,6 @@ class MainWindow:
         self.ui.tex_json.clicked.connect(self.name_data)
         self.ui.pushButton.clicked.connect(self.resert)
         self.ui.mark_Button.clicked.connect(self.mark_data)
-
-
          
     #RGB路径读取文件
     def r_openFile(self):
@@ -106,8 +104,6 @@ class MainWindow:
         Filepath_b = self.ui.b_lineEdit.text()
         Filepath_a = self.ui.a_lineEdit.text()
 
- 
-
         #获取四张图片并转换为RGB
         self.black_image = Image.new('RGBA', (4096, 4096), '#000000')
    
@@ -116,7 +112,6 @@ class MainWindow:
         elif self.ui.r_lineEdit.text() != "":
             self.im1 = Image.open(Filepath_r)
             self.im1 = self.im1.convert('RGBA')
-
 
 
         if self.ui.g_lineEdit.text() == "": 
