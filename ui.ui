@@ -69,7 +69,9 @@ border-style:outset;
 border-radius: 3px;
 
 
-}​</string>
+}​
+
+font: 12px &quot;Tahoma&quot;;</string>
    </property>
    <property name="currentIndex">
     <number>0</number>
