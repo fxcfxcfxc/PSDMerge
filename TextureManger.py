@@ -221,7 +221,7 @@ class MainWindow:
         for layer in psd.descendants():
 
             if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:
-                print(layer)
+               
                 global wlist
                 wlist = self.extractLayerImage(layer,list_b)
 
