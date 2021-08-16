@@ -20,7 +20,7 @@ class MainWindow:
         
         self.ui = QUiLoader().load('ui.ui')
 
-        #判断目录下是否存在json文件，如果存在就读取数据11
+        #判断目录下是否存在json文件，如果存在就读取数据
         if os.path.exists('json_data.json'):
             self.tex_data = {}
 
