@@ -232,7 +232,7 @@ QLineEdit {
        </spacer>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,2,1,5">
+       <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,2,0,1,5">
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
@@ -252,6 +252,16 @@ QLineEdit {
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox_4">
+          <property name="text">
+           <string>按照标签拆分需要通道</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="checkBox">
@@ -340,7 +350,7 @@ QLineEdit {
         <item>
          <widget class="QCheckBox" name="checkBox_3">
           <property name="text">
-           <string>自定义路径</string>
+           <string>自定义路径（开发中）</string>
           </property>
          </widget>
         </item>
@@ -349,7 +359,7 @@ QLineEdit {
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>注：默认g贴图通道路径</string>
+         <string>注：默认G贴图通道路径</string>
         </property>
        </widget>
       </item>

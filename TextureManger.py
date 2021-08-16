@@ -172,13 +172,9 @@ class MainWindow:
         self.im5.save(path3)
 
         #删除png
-
-      
         for pngpath in wlist :
             if os.path.exists(pngpath):  
-    
                 os.remove(pngpath)  
-    
             else:
                 print('no such file')  
 
@@ -187,9 +183,7 @@ class MainWindow:
         pixmap = QPixmap(path3)
         self.ui.label_image.setPixmap(pixmap)
         self.ui.label_image.setScaledContents (True)#图片适应label大小
-
-
-        self.ui.pngname_lineEdit.setText(path2)
+        self.ui.pngname_lineEdit.setText(path2)#显示图片名字
 
 #---------------------------------psd功能开发-------------------------------------
 
@@ -230,9 +224,11 @@ class MainWindow:
         list_b = []
         psd = PSDImage.open(Filepath_psd)
         for layer in psd.descendants():
-            print(layer)
-            global wlist
-            wlist = self.extractLayerImage(layer,list_b)
+
+            if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:
+                print(layer)
+                global wlist
+                wlist = self.extractLayerImage(layer,list_b)
 
         print(wlist)    
 
@@ -254,12 +250,7 @@ class MainWindow:
             else:
                 print("无标签匹配")
 
-
-            
-
-
-         
-        
+      
 
 #------------------------------------------------------------
     #数据写入json

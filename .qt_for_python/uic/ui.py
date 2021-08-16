@@ -140,6 +140,12 @@ class Ui_TextureMange(object):
 
         self.horizontalLayout_6.addItem(self.verticalSpacer_10)
 
+        self.checkBox_4 = QCheckBox(self.groupBox_2)
+        self.checkBox_4.setObjectName(u"checkBox_4")
+        self.checkBox_4.setChecked(True)
+
+        self.horizontalLayout_6.addWidget(self.checkBox_4)
+
         self.checkBox = QCheckBox(self.groupBox_2)
         self.checkBox.setObjectName(u"checkBox")
         self.checkBox.setChecked(True)
@@ -153,8 +159,8 @@ class Ui_TextureMange(object):
 
         self.horizontalLayout_6.setStretch(0, 1)
         self.horizontalLayout_6.setStretch(1, 2)
-        self.horizontalLayout_6.setStretch(2, 1)
-        self.horizontalLayout_6.setStretch(3, 5)
+        self.horizontalLayout_6.setStretch(3, 1)
+        self.horizontalLayout_6.setStretch(4, 5)
 
         self.verticalLayout.addLayout(self.horizontalLayout_6)
 
@@ -483,12 +489,13 @@ class Ui_TextureMange(object):
         self.label.setText(QCoreApplication.translate("TextureMange", u"PSD", None))
         self.psd_Button.setText(QCoreApplication.translate("TextureMange", u"........", None))
         self.label_2.setText(QCoreApplication.translate("TextureMange", u"\u6ce8\uff1a\u9ed8\u8ba4PNG\u62c6\u5206\u5230psd\u76ee\u5f55\u4e2d", None))
+        self.checkBox_4.setText(QCoreApplication.translate("TextureMange", u"\u6309\u7167\u6807\u7b7e\u62c6\u5206\u9700\u8981\u901a\u9053", None))
         self.checkBox.setText(QCoreApplication.translate("TextureMange", u"\u6807\u7b7e\u81ea\u52a8\u5bfc\u5165", None))
         self.out_Button.setText(QCoreApplication.translate("TextureMange", u"PSD\u5206\u89e3\u8f93\u51fa", None))
         self.groupBox.setTitle(QCoreApplication.translate("TextureMange", u"\u8f93\u51fa\u8bbe\u7f6e", None))
         self.coust_Button.setText(QCoreApplication.translate("TextureMange", u"........", None))
-        self.checkBox_3.setText(QCoreApplication.translate("TextureMange", u"\u81ea\u5b9a\u4e49\u8def\u5f84", None))
-        self.label_4.setText(QCoreApplication.translate("TextureMange", u"\u6ce8\uff1a\u9ed8\u8ba4g\u8d34\u56fe\u901a\u9053\u8def\u5f84", None))
+        self.checkBox_3.setText(QCoreApplication.translate("TextureMange", u"\u81ea\u5b9a\u4e49\u8def\u5f84\uff08\u5f00\u53d1\u4e2d\uff09", None))
+        self.label_4.setText(QCoreApplication.translate("TextureMange", u"\u6ce8\uff1a\u9ed8\u8ba4G\u8d34\u56fe\u901a\u9053\u8def\u5f84", None))
         self.tex_json.setText(QCoreApplication.translate("TextureMange", u"\u4fdd\u5b58\u9884\u8bbe", None))
         self.pushButton.setText(QCoreApplication.translate("TextureMange", u"\u91cd\u7f6e", None))
         self.label_5.setText(QCoreApplication.translate("TextureMange", u"\u6587\u4ef6\u540d", None))
