@@ -277,6 +277,10 @@ QLineEdit {
         </item>
         <item>
          <widget class="QPushButton" name="out_Button">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(198, 132, 0);
+color: rgb(0, 0, 0);</string>
+          </property>
           <property name="text">
            <string>PSD分解输出</string>
           </property>
@@ -470,6 +474,10 @@ QLineEdit {
       </item>
       <item>
        <widget class="QPushButton" name="mergeButton">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(198, 132, 0);
+color: rgb(0, 0, 0);</string>
+        </property>
         <property name="text">
          <string>合并输出</string>
         </property>
@@ -518,6 +526,9 @@ QLineEdit {
       </item>
       <item>
        <widget class="QPushButton" name="mark_Button">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(52, 126, 157);</string>
+        </property>
         <property name="text">
          <string>保存标签名称预设</string>
         </property>
@@ -767,7 +778,7 @@ QLineEdit {
 }</string>
     </property>
     <attribute name="title">
-     <string>future</string>
+     <string>More</string>
     </attribute>
    </widget>
   </widget>

@@ -49,7 +49,9 @@ class Ui_TextureMange(object):
 "border-radius: 3px;\n"
 "\n"
 "\n"
-"}\u200b")
+"}\u200b\n"
+"\n"
+"font: 12px \"Tahoma\";")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.tab.setEnabled(True)
@@ -154,6 +156,8 @@ class Ui_TextureMange(object):
 
         self.out_Button = QPushButton(self.groupBox_2)
         self.out_Button.setObjectName(u"out_Button")
+        self.out_Button.setStyleSheet(u"background-color: rgb(198, 132, 0);\n"
+"color: rgb(0, 0, 0);")
 
         self.horizontalLayout_6.addWidget(self.out_Button)
 
@@ -283,6 +287,8 @@ class Ui_TextureMange(object):
 
         self.mergeButton = QPushButton(self.groupBox)
         self.mergeButton.setObjectName(u"mergeButton")
+        self.mergeButton.setStyleSheet(u"background-color: rgb(198, 132, 0);\n"
+"color: rgb(0, 0, 0);")
         self.mergeButton.setAutoDefault(False)
 
         self.verticalLayout_3.addWidget(self.mergeButton)
@@ -313,6 +319,7 @@ class Ui_TextureMange(object):
 
         self.mark_Button = QPushButton(self.RGBA)
         self.mark_Button.setObjectName(u"mark_Button")
+        self.mark_Button.setStyleSheet(u"background-color: rgb(52, 126, 157);")
 
         self.verticalLayout_2.addWidget(self.mark_Button)
 
@@ -523,6 +530,6 @@ class Ui_TextureMange(object):
         self.mark_a.setText(QCoreApplication.translate("TextureMange", u"\u5916\u63cf\u8fb9", None))
         self.a_pushButton.setText(QCoreApplication.translate("TextureMange", u"........", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("TextureMange", u"TextureMerge", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("TextureMange", u"future", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("TextureMange", u"More", None))
     # retranslateUi
 

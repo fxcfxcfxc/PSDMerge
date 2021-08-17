@@ -4,6 +4,7 @@ from typing import List
 from PySide2.QtWidgets import QApplication 
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtGui import QPixmap
+from PySide2.QtGui import  QIcon
 import tkinter as tk
 from  tkinter import messagebox
 from tkinter import filedialog
@@ -96,89 +97,113 @@ class MainWindow:
    
         Filepath_a = filedialog.askopenfilename()
         self.ui.a_lineEdit.setText(Filepath_a)
+    #获取psd大小
+    def psd_size(self,psd_path):
 
+
+        psd = PSDImage.open(psd_path)
+        size = psd.size
+
+
+        return size
+
+
+
+        
     #合并贴图
     def merge_texture(self):
         Filepath_r = self.ui.r_lineEdit.text()
         Filepath_g = self.ui.g_lineEdit.text()
         Filepath_b = self.ui.b_lineEdit.text()
         Filepath_a = self.ui.a_lineEdit.text()
-
-        #获取四张图片并转换为RGB
-        self.black_image = Image.new('RGBA', (4096, 4096), '#000000')
-   
-        if self.ui.r_lineEdit.text() == "":            
-            self.im1 = self.black_image           
-        elif self.ui.r_lineEdit.text() != "":
-            self.im1 = Image.open(Filepath_r)
-            self.im1 = self.im1.convert('RGBA')
+ 
 
 
-        if self.ui.g_lineEdit.text() == "": 
-            self.im2 = self.black_image
-        elif self.ui.g_lineEdit.text() != "":
-            self.im2 = Image.open(Filepath_g)
-            self.im2 = self.im2.convert('RGBA')
+        if Filepath_r =="" and Filepath_g == "" and Filepath_b =="" and Filepath_a =="":
+            root = tk.Tk()
+            root.withdraw()
+            messagebox.showinfo( "提示", "请先选择PSD获取通道路径")
+
+        else:
+            #获取四张图片并转换为RGB
+            Filepath_psd = self.ui.psd_lineEdit.text()
+            size = self.psd_size(Filepath_psd)
+
+
+            self.black_image = Image.new('RGBA', size, '#000000')
+    
+            if self.ui.r_lineEdit.text() == "":            
+                self.im1 = self.black_image           
+            elif self.ui.r_lineEdit.text() != "":
+                self.im1 = Image.open(Filepath_r)
+                self.im1 = self.im1.convert('RGBA')
+
+
+            if self.ui.g_lineEdit.text() == "": 
+                self.im2 = self.black_image
+            elif self.ui.g_lineEdit.text() != "":
+                self.im2 = Image.open(Filepath_g)
+                self.im2 = self.im2.convert('RGBA')
 
 
 
-        if self.ui.b_lineEdit.text() == "": 
-            self.im3 = self.black_image
-        elif self.ui.b_lineEdit.text() != "":
-            self.im3 = Image.open(Filepath_b)
-            self.im3 = self.im3.convert('RGBA')
-        
+            if self.ui.b_lineEdit.text() == "": 
+                self.im3 = self.black_image
+            elif self.ui.b_lineEdit.text() != "":
+                self.im3 = Image.open(Filepath_b)
+                self.im3 = self.im3.convert('RGBA')
+            
 
-        if self.ui.a_lineEdit.text() == "": 
-            self.im4 = self.black_image
-        elif self.ui.a_lineEdit.text() != "":
-            self.im4 = Image.open(Filepath_a)
-            self.im4 = self.im4.convert('RGBA')
-        
-        self.gray_image = Image.new('RGBA', (4096, 4096), '#808080')
-        
+            if self.ui.a_lineEdit.text() == "": 
+                self.im4 = self.black_image
+            elif self.ui.a_lineEdit.text() != "":
+                self.im4 = Image.open(Filepath_a)
+                self.im4 = self.im4.convert('RGBA')
+            
+            self.gray_image = Image.new('RGBA', size, '#808080')
+            
 
-        self.im1 = Image.composite(self.im1,self.gray_image,self.im1)
-        self.im2 = Image.composite(self.im2,self.gray_image,self.im2)
-        self.im3 = Image.composite(self.im3,self.gray_image,self.im3)
-        self.im4 = Image.composite(self.im4,self.gray_image,self.im4)
+            self.im1 = Image.composite(self.im1,self.gray_image,self.im1)
+            self.im2 = Image.composite(self.im2,self.gray_image,self.im2)
+            self.im3 = Image.composite(self.im3,self.gray_image,self.im3)
+            self.im4 = Image.composite(self.im4,self.gray_image,self.im4)
 
-        #分离文件的RGB通道并合并
-        r1, g1, b1, a1= self.im1.split()
-        r2, g2, b2, a2= self.im2.split()
-        r3, g3, b3, a3= self.im3.split()
-        r4, g4, b4, a4= self.im4.split()
-        self.im5 = Image.merge('RGBA', [r1, r2, r3,r4])
+            #分离文件的RGB通道并合并
+            r1, g1, b1, a1= self.im1.split()
+            r2, g2, b2, a2= self.im2.split()
+            r3, g3, b3, a3= self.im3.split()
+            r4, g4, b4, a4= self.im4.split()
+            self.im5 = Image.merge('RGBA', [r1, r2, r3,r4])
 
-        #获取用户的命名规则
-        name1 = self.ui.basename.text()        
-        name2 = self.ui.r_name.text()
-        name3 = self.ui.g_name.text()
-        name4 = self.ui.b_name.text()
-        name5 = self.ui.a_name.text()
-        name6 = self.ui.tex_file_line.text()
-        
-        #获取输出的文件路径
-        path1 = os.path.dirname(Filepath_g)
+            #获取用户的命名规则
+            name1 = self.ui.basename.text()        
+            name2 = self.ui.r_name.text()
+            name3 = self.ui.g_name.text()
+            name4 = self.ui.b_name.text()
+            name5 = self.ui.a_name.text()
+            name6 = self.ui.tex_file_line.text()
+            
+            #获取输出的文件路径
+            path1 = os.path.dirname(Filepath_g)
 
-        path2 = name1+name2+name3+name4+name5+name6
-        path3 = os.path.join (path1,path2)#路径拼接
-        #保存图片
-        self.im5.save(path3)
+            path2 = name1+name2+name3+name4+name5+name6
+            path3 = os.path.join (path1,path2)#路径拼接
+            #保存图片
+            self.im5.save(path3)
 
-        #删除png
-        for pngpath in wlist :
-            if os.path.exists(pngpath):  
-                os.remove(pngpath)  
-            else:
-                print('no such file')  
+            #删除png
+            for pngpath in wlist :
+                if os.path.exists(pngpath):  
+                    os.remove(pngpath)  
+                else:
+                    print('no such file')  
 
-        
-        #显示图片到预览窗口
-        pixmap = QPixmap(path3)
-        self.ui.label_image.setPixmap(pixmap)
-        self.ui.label_image.setScaledContents (True)#图片适应label大小
-        self.ui.pngname_lineEdit.setText(path2)#显示图片名字
+            
+            #显示图片到预览窗口
+            pixmap = QPixmap(path3)
+            self.ui.label_image.setPixmap(pixmap)
+            self.ui.label_image.setScaledContents (True)#图片适应label大小
+            self.ui.pngname_lineEdit.setText(path2)#显示图片名字
 
 #---------------------------------psd功能开发-------------------------------------
 
@@ -213,37 +238,48 @@ class MainWindow:
         mark_g = self.ui.mark_g.text()
         mark_b = self.ui.mark_b.text()
         mark_a = self.ui.mark_a.text()
-        messagebox.showinfo( "提示", "点击确定开始分解，耐心等待几秒，请勿点击屏幕")
+        root = tk.Tk()
+        root.withdraw()
+   
 
         Filepath_psd = self.ui.psd_lineEdit.text()
-        list_b = []
-        psd = PSDImage.open(Filepath_psd)
-        for layer in psd.descendants():
 
-            if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:
-               
-                global wlist
-                wlist = self.extractLayerImage(layer,list_b)
+        if Filepath_psd == "":
 
-        print(wlist)    
+            messagebox.showinfo( "提示", "请先选择PSD")
 
-        #导入路径匹配
-        messagebox.showinfo( "提示", "PSD分解完成点击确认导入路径")
-        for f_path in wlist:
-            if mark_r in f_path:
-                self.ui.r_lineEdit.setText(f_path)
-            elif mark_g in f_path:
-                self.ui.g_lineEdit.setText(f_path)
-            
-            elif mark_b in f_path:
-                self.ui.b_lineEdit.setText(f_path)
+        else:
+
+            messagebox.showinfo( "提示", "点击确定开始分解，耐心等待几秒，请勿点击屏幕")
+            list_b = []
+            psd = PSDImage.open(Filepath_psd)
+            for layer in psd.descendants():
+
+                if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:
+                
+                    global wlist
+                    wlist = self.extractLayerImage(layer,list_b)
+
+            print(wlist)    
+
+            #导入路径匹配
+        
+            messagebox.showinfo( "提示", "PSD分解完成点击确认导入路径")
+            for f_path in wlist:
+                if mark_r in f_path:
+                    self.ui.r_lineEdit.setText(f_path)
+                elif mark_g in f_path:
+                    self.ui.g_lineEdit.setText(f_path)
+                
+                elif mark_b in f_path:
+                    self.ui.b_lineEdit.setText(f_path)
 
 
-            elif mark_a in f_path:
-                self.ui.a_lineEdit.setText(f_path)
+                elif mark_a in f_path:
+                    self.ui.a_lineEdit.setText(f_path)
 
-            else:
-                print("无标签匹配")
+                else:
+                    print("无标签匹配")
 
       
 
@@ -259,6 +295,9 @@ class MainWindow:
 
         with open('json_data.json', 'w') as f:
             json.dump(self.tex_data, f)
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo( "提示", "保存成功！")
 
 
     def mark_data(self):
@@ -271,6 +310,9 @@ class MainWindow:
 
         with open('mark_data.json', 'w') as f:
             json.dump(self.tex_data, f)
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo( "提示", "保存成功！")
 
 
 
@@ -281,7 +323,7 @@ class MainWindow:
         self.tex_data['g_name'] = self.ui.g_name.setText('_06')
         self.tex_data['b_name'] = self.ui.b_name.setText('_m')
         self.tex_data['b_name'] = self.ui.a_name.setText('')
-
+        
         with open('json_data.json', 'w') as f:
             json.dump(self.tex_data, f)
 
@@ -294,7 +336,7 @@ if __name__ == "__main__":
     app = QApplication.instance()
     if app == None:
         app = QApplication([])
-    
+    app.setWindowIcon(QIcon('logo.png'))
     #实列一个窗口对象
     mainwindow = MainWindow()
     mainwindow.ui.show()
