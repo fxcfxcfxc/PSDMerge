@@ -48,13 +48,34 @@ class MainWindow:
             self.ui.mark_a.setText(self.tex_data['a_mark'])
 
 
+
+
+        if os.path.exists('rgba_data.json'):
+            self.tex_data = {}
+
+            with open('rgba_data.json','r') as f:
+                self.tex_data = json.load(f)
+
+    
+            self.ui.default_r.setText(self.tex_data['r_default'])
+            self.ui.default_g.setText(self.tex_data['g_default'])
+            self.ui.default_b.setText(self.tex_data['b_default'])
+            self.ui.default_a.setText(self.tex_data['a_default'])
+
+
+            self.ui.merge_r_c.setText(self.tex_data['r_mergec'])
+            self.ui.merge_g_c.setText(self.tex_data['g_mergec'])
+            self.ui.merge_b_c.setText(self.tex_data['b_mergec'])
+            self.ui.merge_a_c.setText(self.tex_data['a_mergec'])
+
+
 #--------------------------------------
         #按钮响应
         self.ui.r_pushButton.clicked.connect(self.r_openFile)
         self.ui.g_pushButton.clicked.connect(self.g_openFile)
         self.ui.b_pushButton.clicked.connect(self.b_openFile)
         self.ui.a_pushButton.clicked.connect(self.a_openFile)
-        #psd
+       
         self.ui.psd_Button.clicked.connect(self.psd_openFile)
         self.ui.out_Button.clicked.connect(self.extrac_psd)
 
@@ -62,7 +83,11 @@ class MainWindow:
         self.ui.tex_json.clicked.connect(self.name_data)
         self.ui.pushButton.clicked.connect(self.resert)
         self.ui.mark_Button.clicked.connect(self.mark_data)
-         
+
+        self.ui.mark_Button_3.clicked.connect(self.rgba_data)
+
+
+ # --------------------------------------------------       
     #RGB路径读取文件
     def r_openFile(self):
         
@@ -125,22 +150,31 @@ class MainWindow:
             messagebox.showinfo( "提示", "请先选择PSD获取通道路径")
 
         else:
+            
             #获取四张图片并转换为RGB
             Filepath_psd = self.ui.psd_lineEdit.text()
             size = self.psd_size(Filepath_psd)
 
+            default_r_c = self.ui.default_r.text()
+            default_g_c = self.ui.default_g.text()
+            default_b_c = self.ui.default_b.text()
+            default_a_c = self.ui.default_a.text()
 
-            self.black_image = Image.new('RGBA', size, '#000000')
+            self.default_r_image = Image.new('RGBA', size, default_r_c)
+            self.default_g_image = Image.new('RGBA', size, default_g_c)
+            self.default_b_image = Image.new('RGBA', size, default_b_c)
+            self.default_a_image = Image.new('RGBA', size, default_a_c)
+            
     
             if self.ui.r_lineEdit.text() == "":            
-                self.im1 = self.black_image           
+                self.im1 = self.default_r_image           
             elif self.ui.r_lineEdit.text() != "":
                 self.im1 = Image.open(Filepath_r)
                 self.im1 = self.im1.convert('RGBA')
 
 
             if self.ui.g_lineEdit.text() == "": 
-                self.im2 = self.black_image
+                self.im2 = self.default_g_image
             elif self.ui.g_lineEdit.text() != "":
                 self.im2 = Image.open(Filepath_g)
                 self.im2 = self.im2.convert('RGBA')
@@ -148,25 +182,36 @@ class MainWindow:
 
 
             if self.ui.b_lineEdit.text() == "": 
-                self.im3 = self.black_image
+                self.im3 = self.default_b_image
             elif self.ui.b_lineEdit.text() != "":
                 self.im3 = Image.open(Filepath_b)
                 self.im3 = self.im3.convert('RGBA')
             
 
             if self.ui.a_lineEdit.text() == "": 
-                self.im4 = self.black_image
+                self.im4 = self.default_a_image
             elif self.ui.a_lineEdit.text() != "":
                 self.im4 = Image.open(Filepath_a)
                 self.im4 = self.im4.convert('RGBA')
             
-            self.gray_image = Image.new('RGBA', size, '#808080')
+
+            m_r_c = self.ui.merge_r_c.text()
+            m_g_c = self.ui.merge_g_c.text()
+            m_b_c = self.ui.merge_b_c.text()
+            m_a_c = self.ui.merge_a_c.text()
+
+
+            self.m_r_image = Image.new('RGBA', size, m_r_c)
+            self.m_g_image = Image.new('RGBA', size, m_g_c)
+            self.m_b_image = Image.new('RGBA', size, m_b_c)
+            self.m_a_image = Image.new('RGBA', size, m_a_c)
+
             
 
-            self.im1 = Image.composite(self.im1,self.gray_image,self.im1)
-            self.im2 = Image.composite(self.im2,self.gray_image,self.im2)
-            self.im3 = Image.composite(self.im3,self.gray_image,self.im3)
-            self.im4 = Image.composite(self.im4,self.gray_image,self.im4)
+            self.im1 = Image.composite(self.im1,self.m_r_image,self.im1)
+            self.im2 = Image.composite(self.im2,self.m_g_image,self.im2)
+            self.im3 = Image.composite(self.im3,self.m_b_image,self.im3)
+            self.im4 = Image.composite(self.im4,self.m_a_image,self.im4)
 
             #分离文件的RGB通道并合并
             r1, g1, b1, a1= self.im1.split()
@@ -204,6 +249,12 @@ class MainWindow:
             self.ui.label_image.setPixmap(pixmap)
             self.ui.label_image.setScaledContents (True)#图片适应label大小
             self.ui.pngname_lineEdit.setText(path2)#显示图片名字
+
+
+            show_path = os.path.dirname(Filepath_psd)
+            os.startfile(show_path)
+
+
 
 #---------------------------------psd功能开发-------------------------------------
 
@@ -316,6 +367,27 @@ class MainWindow:
 
 
 
+
+    def rgba_data(self):
+        self.tex_data = {}
+        
+        self.tex_data['r_default'] = self.ui.default_r.text()
+        self.tex_data['g_default'] = self.ui.default_g.text()
+        self.tex_data['b_default'] = self.ui.default_b.text()
+        self.tex_data['a_default'] = self.ui.default_a.text()
+
+        self.tex_data['r_mergec'] = self.ui.merge_r_c.text()
+        self.tex_data['g_mergec'] = self.ui.merge_g_c.text()
+        self.tex_data['b_mergec'] = self.ui.merge_b_c.text()
+        self.tex_data['a_mergec'] = self.ui.merge_a_c.text()
+
+        with open('rgba_data.json', 'w') as f:
+            json.dump(self.tex_data, f)
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo( "提示", "保存成功！")
+
+
     def  resert(self):
         self.tex_data = {}
         self.tex_data['base_name'] = self.ui.basename.setText('T')
@@ -326,6 +398,13 @@ class MainWindow:
         
         with open('json_data.json', 'w') as f:
             json.dump(self.tex_data, f)
+
+
+
+
+
+
+
 
  # 在 if __name__ == 'main': 下的代码只有在第一种情况下（即文件作为脚本直接执行）才会被执行
  # 而 import 到其他脚本中是不会被执行的
