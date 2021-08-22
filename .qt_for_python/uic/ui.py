@@ -257,11 +257,13 @@ class Ui_TextureMange(object):
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
 
-        self.progressBar = QProgressBar(self.groupBox_2)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setValue(24)
+        self.progressBar1 = QProgressBar(self.groupBox_2)
+        self.progressBar1.setObjectName(u"progressBar1")
+        self.progressBar1.setMaximum(105)
+        self.progressBar1.setValue(0)
+        self.progressBar1.setInvertedAppearance(False)
 
-        self.verticalLayout_3.addWidget(self.progressBar)
+        self.verticalLayout_3.addWidget(self.progressBar1)
 
         self.show_box = QGroupBox(self.tab)
         self.show_box.setObjectName(u"show_box")
@@ -375,6 +377,7 @@ class Ui_TextureMange(object):
 
         self.r_lineEdit = QLineEdit(self.groupBox1)
         self.r_lineEdit.setObjectName(u"r_lineEdit")
+        self.r_lineEdit.setStyleSheet(u"color: rgb(255, 0, 0);")
 
         self.horizontalLayout_2.addWidget(self.r_lineEdit)
 
@@ -453,6 +456,7 @@ class Ui_TextureMange(object):
 
         self.g_lineEdit = QLineEdit(self.groupBox2)
         self.g_lineEdit.setObjectName(u"g_lineEdit")
+        self.g_lineEdit.setStyleSheet(u"color: rgb(39, 204, 20);")
 
         self.g_frame.addWidget(self.g_lineEdit)
 
@@ -522,6 +526,7 @@ class Ui_TextureMange(object):
 
         self.b_lineEdit = QLineEdit(self.groupBox_6)
         self.b_lineEdit.setObjectName(u"b_lineEdit")
+        self.b_lineEdit.setStyleSheet(u"color: rgb(0, 166, 255);")
 
         self.b_frame.addWidget(self.b_lineEdit)
 

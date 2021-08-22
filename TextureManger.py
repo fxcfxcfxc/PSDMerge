@@ -1,17 +1,19 @@
 
-from tkinter.constants import W
+from tkinter.constants import HORIZONTAL, W
 from typing import List
-from PySide2.QtWidgets import QApplication 
+from PySide2.QtWidgets import QApplication
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtGui import QPixmap
 from PySide2.QtGui import  QIcon
 import tkinter as tk
-from  tkinter import messagebox
+from  tkinter import Tk, messagebox
 from tkinter import filedialog
 from PIL import Image
 import os
 import json
 from psd_tools import PSDImage
+from time import sleep
+
 
 
 class MainWindow:
@@ -289,33 +291,30 @@ class MainWindow:
         mark_g = self.ui.mark_g.text()
         mark_b = self.ui.mark_b.text()
         mark_a = self.ui.mark_a.text()
-        root = tk.Tk()
-        root.withdraw()
-   
-
         Filepath_psd = self.ui.psd_lineEdit.text()
 
         if Filepath_psd == "":
-
+             
             messagebox.showinfo( "提示", "请先选择PSD")
 
         else:
 
-            messagebox.showinfo( "提示", "点击确定开始分解，耐心等待几秒，请勿点击屏幕")
+            psd = PSDImage.open(Filepath_psd)            
             list_b = []
-            psd = PSDImage.open(Filepath_psd)
+        
+            x =100/len(list(psd.descendants()))
+            b = 5
+            self.ui.progressBar1.setValue(b)                   
             for layer in psd.descendants():
-
-                if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:
-                
+         
+                if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:               
                     global wlist
                     wlist = self.extractLayerImage(layer,list_b)
-
-            print(wlist)    
-
-            #导入路径匹配
-        
-            messagebox.showinfo( "提示", "PSD分解完成点击确认导入路径")
+                b= b+x    
+                self.ui.progressBar1.setValue(b)
+                
+                            
+            #导入路径匹配  
             for f_path in wlist:
                 if mark_r in f_path:
                     self.ui.r_lineEdit.setText(f_path)
@@ -332,7 +331,13 @@ class MainWindow:
                 else:
                     print("无标签匹配")
 
-      
+
+            root = tk.Tk()
+            root.withdraw()
+            messagebox.showinfo( "提示", "导入成功，检查正确的文件名，并点击合并输出")
+        return 0
+        
+            
 
 #------------------------------------------------------------
     #数据写入json
@@ -350,7 +355,6 @@ class MainWindow:
         root.withdraw()
         messagebox.showinfo( "提示", "保存成功！")
 
-
     def mark_data(self):
         self.tex_data = {}
         
@@ -364,8 +368,6 @@ class MainWindow:
         root = tk.Tk()
         root.withdraw()
         messagebox.showinfo( "提示", "保存成功！")
-
-
 
 
     def rgba_data(self):
@@ -399,17 +401,11 @@ class MainWindow:
         with open('json_data.json', 'w') as f:
             json.dump(self.tex_data, f)
 
-
-
-
-
-
-
-
  # 在 if __name__ == 'main': 下的代码只有在第一种情况下（即文件作为脚本直接执行）才会被执行
  # 而 import 到其他脚本中是不会被执行的
     
 if __name__ == "__main__":
+    
     
     #判断app销毁
     app = QApplication.instance()

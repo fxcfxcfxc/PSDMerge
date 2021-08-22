@@ -368,9 +368,15 @@ color: rgb(0, 0, 0);</string>
          </layout>
         </item>
         <item>
-         <widget class="QProgressBar" name="progressBar">
+         <widget class="QProgressBar" name="progressBar1">
+          <property name="maximum">
+           <number>105</number>
+          </property>
           <property name="value">
-           <number>24</number>
+           <number>0</number>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -531,7 +537,7 @@ QLineEdit {
          </layout>
         </item>
         <item>
-         <widget class="QGroupBox" name="">
+         <widget class="QGroupBox" name="groupBox">
           <property name="title">
            <string>R</string>
           </property>
@@ -559,7 +565,11 @@ QLineEdit {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="r_lineEdit"/>
+              <widget class="QLineEdit" name="r_lineEdit">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 0, 0);</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="r_pushButton">
@@ -638,7 +648,7 @@ QLineEdit {
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="">
+         <widget class="QGroupBox" name="groupBox">
           <property name="title">
            <string>G</string>
           </property>
@@ -666,7 +676,11 @@ QLineEdit {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="g_lineEdit"/>
+              <widget class="QLineEdit" name="g_lineEdit">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(39, 204, 20);</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="g_pushButton">
@@ -754,7 +768,11 @@ QLineEdit {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="b_lineEdit"/>
+              <widget class="QLineEdit" name="b_lineEdit">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(0, 166, 255);</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="b_pushButton">
@@ -814,7 +832,7 @@ QLineEdit {
          </widget>
         </item>
         <item>
-         <widget class="QGroupBox" name="">
+         <widget class="QGroupBox" name="groupBox">
           <property name="title">
            <string>A</string>
           </property>
