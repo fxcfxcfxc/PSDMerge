@@ -338,7 +338,10 @@ class MainWindow:
         return 0
         
             
-
+    def waring(self):
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo( "提示", "保存成功！")    
 #------------------------------------------------------------
     #数据写入json
     def name_data(self):
@@ -351,9 +354,7 @@ class MainWindow:
 
         with open('json_data.json', 'w') as f:
             json.dump(self.tex_data, f)
-        root = tk.Tk()
-        root.withdraw()
-        messagebox.showinfo( "提示", "保存成功！")
+        self.waring()
 
     def mark_data(self):
         self.tex_data = {}
@@ -365,9 +366,7 @@ class MainWindow:
 
         with open('mark_data.json', 'w') as f:
             json.dump(self.tex_data, f)
-        root = tk.Tk()
-        root.withdraw()
-        messagebox.showinfo( "提示", "保存成功！")
+        self.waring()
 
 
     def rgba_data(self):
@@ -385,9 +384,7 @@ class MainWindow:
 
         with open('rgba_data.json', 'w') as f:
             json.dump(self.tex_data, f)
-        root = tk.Tk()
-        root.withdraw()
-        messagebox.showinfo( "提示", "保存成功！")
+        self.waring()
 
 
     def  resert(self):
