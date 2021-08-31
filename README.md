@@ -4,4 +4,4 @@
 解决项目中psd文件图层到最后的输出流程问题  
 
 ## 界面
-![windows](.\readme-image/01.png)
+![windows](./readme-image/01.png)
