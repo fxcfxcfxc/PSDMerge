@@ -5,7 +5,7 @@ from PySide2.QtWidgets import QApplication
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtGui import QPixmap
 from PySide2.QtGui import  QIcon
-import tkinter as tk
+import tkinter as tk    
 from  tkinter import Tk, messagebox
 from tkinter import filedialog
 from PIL import Image
