@@ -4,4 +4,4 @@
 一款独立于PS的软件，解决项目中psd文件图层到最后的输出合并流程问题  
 
 ## 界面
-![windows](./readme-image/01.png)
+![UI](./readme-image/01.png)

@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>TextureManger_v1.0</string>
+   <string>PSDMerge_v1.0</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -60,7 +60,7 @@
        <string notr="true"/>
       </property>
       <attribute name="title">
-       <string>TextureMerge</string>
+       <string>PsdTexture</string>
       </attribute>
       <widget class="QGroupBox" name="groupBox">
        <property name="geometry">

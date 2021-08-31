@@ -77,7 +77,7 @@ class MainWindow:
         self.ui.g_pushButton.clicked.connect(self.g_openFile)
         self.ui.b_pushButton.clicked.connect(self.b_openFile)
         self.ui.a_pushButton.clicked.connect(self.a_openFile)
-       
+
         self.ui.psd_Button.clicked.connect(self.psd_openFile)
         self.ui.out_Button.clicked.connect(self.extrac_psd)
 
@@ -95,7 +95,7 @@ class MainWindow:
         
         root = tk.Tk()
         root.withdraw()
-      
+
         Filepath_r = filedialog.askopenfilename()      
         self.ui.r_lineEdit.setText(Filepath_r)
 
@@ -103,7 +103,7 @@ class MainWindow:
         
         root = tk.Tk()
         root.withdraw()
-      
+
         Filepath_g = filedialog.askopenfilename()
         self.ui.g_lineEdit.setText(Filepath_g)       
 
@@ -112,7 +112,7 @@ class MainWindow:
         
         root = tk.Tk()
         root.withdraw()
-      
+
         Filepath_b = filedialog.askopenfilename()
         self.ui.b_lineEdit.setText(Filepath_b)
 
@@ -121,7 +121,7 @@ class MainWindow:
         
         root = tk.Tk()
         root.withdraw()
-   
+
         Filepath_a = filedialog.askopenfilename()
         self.ui.a_lineEdit.setText(Filepath_a)
     #获取psd大小
@@ -143,7 +143,7 @@ class MainWindow:
         Filepath_g = self.ui.g_lineEdit.text()
         Filepath_b = self.ui.b_lineEdit.text()
         Filepath_a = self.ui.a_lineEdit.text()
- 
+
 
 
         if Filepath_r =="" and Filepath_g == "" and Filepath_b =="" and Filepath_a =="":
@@ -255,9 +255,6 @@ class MainWindow:
 
             show_path = os.path.dirname(Filepath_psd)
             os.startfile(show_path)
-
-
-
 #---------------------------------psd功能开发-------------------------------------
 
 #获取PSD的路径
@@ -271,7 +268,7 @@ class MainWindow:
     
     #png到处方法
     def extractLayerImage(self,layer,list_b):
-       
+
         Filepath_psd = self.ui.psd_lineEdit.text()
         psd_Path = os.path.dirname(Filepath_psd)    
         png_name = "%s.png"%(layer.name)
@@ -280,9 +277,8 @@ class MainWindow:
         layer_image.save(png_path)
 
         list_b.append(png_path)
-       
-        return list_b
 
+        return list_b
 
     wlist = []
     #分析psd贴图导出PNG
@@ -294,11 +290,8 @@ class MainWindow:
         Filepath_psd = self.ui.psd_lineEdit.text()
 
         if Filepath_psd == "":
-             
             messagebox.showinfo( "提示", "请先选择PSD")
-
         else:
-
             psd = PSDImage.open(Filepath_psd)            
             list_b = []
         
@@ -306,14 +299,11 @@ class MainWindow:
             b = 5
             self.ui.progressBar1.setValue(b)                   
             for layer in psd.descendants():
-         
                 if layer.name in mark_r or layer.name in mark_g or layer.name in mark_b  or layer.name in mark_a:               
                     global wlist
                     wlist = self.extractLayerImage(layer,list_b)
                 b= b+x    
                 self.ui.progressBar1.setValue(b)
-                
-                            
             #导入路径匹配  
             for f_path in wlist:
                 if mark_r in f_path:
@@ -324,20 +314,17 @@ class MainWindow:
                 elif mark_b in f_path:
                     self.ui.b_lineEdit.setText(f_path)
 
-
                 elif mark_a in f_path:
                     self.ui.a_lineEdit.setText(f_path)
 
                 else:
                     print("无标签匹配")
 
-
             root = tk.Tk()
             root.withdraw()
             messagebox.showinfo( "提示", "导入成功，检查正确的文件名，并点击合并输出")
         return 0
-        
-            
+
     def waring(self):
         root = tk.Tk()
         root.withdraw()
@@ -368,7 +355,6 @@ class MainWindow:
             json.dump(self.tex_data, f)
         self.waring()
 
-
     def rgba_data(self):
         self.tex_data = {}
         
@@ -385,7 +371,6 @@ class MainWindow:
         with open('rgba_data.json', 'w') as f:
             json.dump(self.tex_data, f)
         self.waring()
-
 
     def  resert(self):
         self.tex_data = {}
