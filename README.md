@@ -6,5 +6,5 @@
 ## 界面
 ![UI](./readme-image/01.png)
 
-## 软件逻辑
+## 逻辑
 ![draw](./readme-image/02.png)
