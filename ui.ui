@@ -37,6 +37,19 @@
      <property name="enabled">
       <bool>true</bool>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox {
+    
+    border: 1px solid rgb(116, 116, 116) ;
+    border-radius: 4px;
+    margin-top: 1ex; /* leave space at the top for the title */
+}
+QGroupBox::title {
+   
+    background-color: ;
+	color: rgb(0, 0, 0);
+}</string>
+     </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -71,6 +84,13 @@
          <height>251</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
@@ -87,19 +107,32 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="2,0,0">
           <item>
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="lineEdit_5">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="coust_Button">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>........</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="checkBox_3">
             <property name="text">
-             <string>自定义路径（开发中）</string>
+             <string>自定义路径</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -231,6 +264,11 @@
          <width>901</width>
          <height>151</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="mouseTracking">
         <bool>false</bool>
@@ -411,34 +449,61 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="title">
         <string>RGBA</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Maximum</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="yushe01">
           <item>
-           <layout class="QHBoxLayout" name="yushe01">
-            <item>
-             <widget class="QPushButton" name="mark_Button">
-              <property name="text">
-               <string>保存标签名称预设</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="mark_Button_3">
-              <property name="text">
-               <string>保存颜色设置预设</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QPushButton" name="mark_Button">
+            <property name="text">
+             <string>保存标签名称预设</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="mark_Button_3">
+            <property name="text">
+             <string>保存颜色设置预设</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {
+    
+    border: 1px solid rgb(194, 194, 194) ;
+    border-radius: 4px;
+    margin-top: 1ex; /* leave space at the top for the title */
+}</string>
+          </property>
           <property name="title">
            <string>R</string>
           </property>
@@ -550,6 +615,14 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {
+    
+    border: 1px solid rgb(194, 194, 194) ;
+    border-radius: 4px;
+    margin-top: 1ex; /* leave space at the top for the title */
+}</string>
+          </property>
           <property name="title">
            <string>G</string>
           </property>
@@ -642,6 +715,14 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox_6">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {
+    
+    border: 1px solid rgb(194, 194, 194) ;
+    border-radius: 4px;
+    margin-top: 1ex; /* leave space at the top for the title */
+}</string>
+          </property>
           <property name="title">
            <string>B</string>
           </property>
@@ -734,6 +815,14 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox {
+    
+    border: 1px solid rgb(194, 194, 194) ;
+    border-radius: 4px;
+    margin-top: 1ex; /* leave space at the top for the title */
+}</string>
+          </property>
           <property name="title">
            <string>A</string>
           </property>
@@ -830,5 +919,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkBox_3</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>coust_Button</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>814</x>
+     <y>800</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>714</x>
+     <y>795</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkBox_3</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>lineEdit_5</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>881</x>
+     <y>797</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>603</x>
+     <y>804</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
