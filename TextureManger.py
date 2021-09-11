@@ -2,9 +2,11 @@
 from tkinter.constants import HORIZONTAL, W
 from typing import List
 from PySide2.QtWidgets import QApplication
+from PySide2.QtWidgets import QFileDialog
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtGui import QPixmap
 from PySide2.QtGui import  QIcon
+from PySide2.QtCore import QFile
 import tkinter as tk    
 from  tkinter import Tk, messagebox
 from tkinter import filedialog
@@ -20,7 +22,6 @@ class MainWindow:
 
     
     def __init__(self):
-        
         self.ui = QUiLoader().load('ui.ui')
 
         #判断目录下是否存在json文件，如果存在就读取数据
@@ -71,8 +72,8 @@ class MainWindow:
             self.ui.merge_a_c.setText(self.tex_data['a_mergec'])
 
 
-#--------------------------------------
-        #按钮响应
+        #功能绑定
+        
         self.ui.r_pushButton.clicked.connect(self.r_openFile)
         self.ui.g_pushButton.clicked.connect(self.g_openFile)
         self.ui.b_pushButton.clicked.connect(self.b_openFile)
@@ -87,10 +88,13 @@ class MainWindow:
         self.ui.mark_Button.clicked.connect(self.mark_data)
 
         self.ui.mark_Button_3.clicked.connect(self.rgba_data)
+        self.ui.coust_Button.clicked.connect(self.customExportPath)
 
-
- # --------------------------------------------------       
     #RGB路径读取文件
+    def customExportPath(self):
+        filePath = QFileDialog.getExistingDirectory(self.ui, "选择存储路径")
+        self.ui.lineEdit_5.setText(filePath)
+
     def r_openFile(self):
         
         root = tk.Tk()
@@ -124,6 +128,7 @@ class MainWindow:
 
         Filepath_a = filedialog.askopenfilename()
         self.ui.a_lineEdit.setText(Filepath_a)
+        
     #获取psd大小
     def psd_size(self,psd_path):
 
@@ -133,8 +138,6 @@ class MainWindow:
 
 
         return size
-
-
 
         
     #合并贴图
@@ -231,11 +234,15 @@ class MainWindow:
             name6 = self.ui.tex_file_line.text()
             
             #获取输出的文件路径
-            path1 = os.path.dirname(Filepath_g)
+            if self.ui.lineEdit_5.isEnabled():
+
+                path1 = self.ui.lineEdit_5.text()
+            else:
+                path1 = os.path.dirname(Filepath_g)
 
             path2 = name1+name2+name3+name4+name5+name6
             path3 = os.path.join (path1,path2)#路径拼接
-            #保存图片
+                #保存图片
             self.im5.save(path3)
 
             #删除png
@@ -252,8 +259,8 @@ class MainWindow:
             self.ui.label_image.setScaledContents (True)#图片适应label大小
             self.ui.pngname_lineEdit.setText(path2)#显示图片名字
 
-
-            show_path = os.path.dirname(Filepath_psd)
+            #打开图片路径
+            show_path = os.path.dirname(path3)
             os.startfile(show_path)
 #---------------------------------psd功能开发-------------------------------------
 
